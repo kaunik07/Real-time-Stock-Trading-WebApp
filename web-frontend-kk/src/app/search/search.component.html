@@ -1,0 +1,197 @@
+<div *ngIf="stockSummaryData container">
+
+    <!-- NOTIFICATIONS -->
+    <div *ngIf="stock_wishlist_yes" class="notify-div nt-y">
+        <div  class="notify-text">
+            {{ company_details.ticker }} added to Watchlist. 
+        </div>
+        <button type="button" class="btn-close notify-btt" (click)="removedWishlistNotify()"></button>
+    </div>
+     
+    <div *ngIf="stock_wishlist_no" class="notify-div nt-n">
+        <div class="notify-text">
+            {{ company_details.ticker }} removed from Watchlist.
+        </div>
+        <button type="button" class="btn-close notify-btt" (click)="removedWishlistNotify()"></button>
+    </div>
+    <div *ngIf="stock_buy_notify" class="notify-div nt-y">
+        <div class="notify-text">
+            {{ company_details.ticker }} bought successfully.
+        </div>
+        <button type="button" class="btn-close notify-btt" (click)="removedPurchaseNotify()"></button>
+    </div>
+    <div *ngIf="stock_sell_notify" class="notify-div nt-n">
+        <div class="notify-text">
+            {{ company_details.ticker }} sold successfully.
+        </div>
+        <button type="button" class="btn-close notify-btt" (click)="removedPurchaseNotify()"></button>
+    </div>
+
+    
+    <!-- STOCK DATA -->
+    <div class="row  g-2">
+
+        <!-- LEFT SECTION -->
+        <div class="col-4">
+
+            <!-- TICKER + STAR -->
+            <div class="tick_star top-1">
+                <div class="ticker">{{ company_details.ticker }}</div>
+                <svg *ngIf="isStockWishlisted" class="bi star-wishlisted star-wish" (click)="onWishlist()" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"  viewBox="0 0 16 16">
+                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                </svg>
+                <svg (click)="onWishlist()" *ngIf="!isStockWishlisted" class="star-not-wishlisted star-wish" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star" viewBox="0 0 16 16">
+                    <path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.56.56 0 0 0-.163-.505L1.71 6.745l4.052-.576a.53.53 0 0 0 .393-.288L8 2.223l1.847 3.658a.53.53 0 0 0 .393.288l4.052.575-2.906 2.77a.56.56 0 0 0-.163.506l.694 3.957-3.686-1.894a.5.5 0 0 0-.461 0z"/>
+                </svg>
+            </div>
+
+            <!-- COMPANY NAME -->
+            <div class="top-2 company_name" style="color:grey;">{{ company_details.name }}</div>
+            <div class="top-3">{{ company_details.exchange }}</div>
+
+            <div class="buy-sell">
+                <button class="buy-button" class="buy-button" 
+                            (click)="buymodal({
+                                'ticker':company_details.ticker,
+                                'current':stockprice.c,
+                                'name':company_details.name
+                              },buystock)">Buy</button>
+                <button class="sell-button" *ngIf="sell_button" (click)="sellmodal({
+                    'ticker':company_details.ticker,
+                    'current':stockprice.c,
+                    'name':company_details.name,
+                    'quantity':stock_portfolio.quantity
+                    },sellstock)">Sell</button>
+            </div>
+
+        </div>
+
+        <!-- COMPANY LOGO -->
+        <div class="col-4 company-logo-div">
+            <img class="company-logo" src="{{ company_details.logo }}">
+        </div>
+
+        <!-- STOCK PRICE -->
+        <div class="col-4">
+            <!-- PRICE -->
+            <div class="top-1" [ngClass]="{ 'positive-value': stock_up == true, 'negative-value':stock_up==false }">{{ stockprice.c}}</div>
+
+            <!-- PRICE CHANGE -->
+            <div class="top-2" style="margin-right:2px" [ngClass]="{ 'positive-value': stock_up ==true, 'negative-value':stock_up==false }">
+                <svg *ngIf="stock_up" class="sign-logo-up" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-up-fill" viewBox="0 0 16 16">
+                    <path d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z"/>
+                </svg>
+                <svg *ngIf="!stock_up" class="sign-logo-down" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                    <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+                </svg>
+                <!-- <button *ngIf="!stock_up" class="sign-logo-down"></button>  -->
+                {{ stockprice.d }} ({{ stockprice.dp.toFixed(2)}}%)
+            </div>
+
+            <!-- TIMESTAMP -->
+            <!-- <div class="top-3">{{ stockprice.current_time }}</div> -->
+            <div class="top-3">{{ current_time }}</div>
+        </div>
+
+
+        <div class="market-status">
+            <div *ngIf="market_status; else closedMarket" style="color:#339454;" >Market is Open</div>
+            <ng-template #closedMarket>
+                <div style="color:#e03c4d;">Market Closed on {{stock_price_time}}</div>
+            </ng-template>
+        </div>
+    </div>
+
+    <mat-tab-group class="tab-content">
+        <mat-tab label="Summary"> 
+            <app-summary-tab></app-summary-tab> 
+        </mat-tab>
+        <mat-tab label="Top News"> 
+            <app-news-tab></app-news-tab>
+        </mat-tab>
+        <mat-tab label="Chart"> 
+            <app-charts-tab></app-charts-tab> 
+        </mat-tab>
+        <mat-tab label="Insight"> 
+            <app-insight-tab ></app-insight-tab>
+        </mat-tab>
+    </mat-tab-group>
+
+</div>
+
+
+<ng-template #buystock let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">{{ buyStockM.ticker }}</h4>
+      <div class="close-btt-div">
+        <button type="button" class="close-btt" (click)="modal.close()">x</button>
+      </div>
+    </div>
+    <div class="modal-body">
+        <form>
+            <div class="stock-modal">Current Price: {{ buyStockM.current }}</div>
+            <div class="stock-modal">Money in Wallet: ${{ walletAmount.toFixed(2) }}</div>
+            <div class="stock-modal qty-row row">
+                <div class="col-md-2 col-3">
+                  <span>Quantity:</span>
+                </div>
+                <div class="col-md-10 col-9 qty-div">
+                  <input
+                    id="quantity" 
+                    class="form-control qty"
+                    name="stock_quantity"
+                    (input)="costcaluationBuy($event)"
+                    type="number" value="0" min="0"
+                  />
+                </div>
+            </div>
+            <div *ngIf=noBuyPossible style="color:red">Not enough money in wallet!</div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <div class="cal">Total: {{ buy_total_cost.toFixed(2) }}</div>
+        <button type="button" class="btn modal-button" 
+          (click)="buyStock(buyStockM);"
+          [disabled]="buy_btt_disable">Buy</button>
+    </div>
+</ng-template>
+  
+<ng-template #sellstock let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">{{ sellStockM.ticker }}</h4>
+        <!-- <button type="button" class="close-btt" (click)="modal.close()">x</button> -->
+        <div class="close-btt-div">
+            <!-- <button type="button" class="close-btt" (click)="modal.close()"><b><u>x</u></b></button> -->
+            <button type="button" class="close-btt" (click)="modal.close()">x</button>
+        </div>
+    </div>
+    <div class="modal-body">
+        <form>
+            <div class="stock-modal">Current Price: {{ sellStockM.current }}</div>
+            <div class="stock-modal">Money in Wallet: ${{ walletAmount.toFixed(2) }}</div>
+            <div class="stock-modal qty-row row">
+                <div class="col-md-2 col-3">
+                  <span>Quantity:</span>
+                </div>
+                <div class="col-md-10 col-9 qty-div">
+                  <input
+                    id="quantity" 
+                    class="form-control qty"
+                    name="stock_quantity"
+                    (input)="costcaluationSell($event,sellStockM.quantity)"
+                    type="number" value="0" min="0"
+                  />
+                </div>
+            </div>
+            <div *ngIf=noSellPossible style="color:red">You cannot sell the stocks that you don't have!</div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <div class="cal">Total: {{ sell_total_cost.toFixed(2) }}</div>
+        <button type="button" class="btn modal-button" 
+            (click)="sellStock(sellStockM);
+            modal.close()"
+            [disabled]="sell_btt_disable">Sell</button>
+    </div>
+</ng-template>
+

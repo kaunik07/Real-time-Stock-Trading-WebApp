@@ -1,0 +1,195 @@
+<!-- <div class="navbar navbar-expand-lg stock-navbar">
+    <div class="navbar-brand stock-navbar-left col-md-9">Stock Search</div>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" >
+        <span class="navbar-toggler-icon ">
+            <i class="fas fa-bars" style="color:#fff; font-size:28px;"></i>
+        </span>
+    </button>
+    <div class="collapse navbar-collapse stock-navbar-right" id="navbarNavAltMarkup">
+        <div class="navbar-nav stock-navbar-right-div">
+            <a class="nav-item portal-nav nav-link" routerLink="/search/home">Search</a>
+            <a class="nav-item portal-nav nav-link" routerLink="/watchlist">Watchlist</a>
+            <a class="nav-item portal-nav nav-link active-nav" routerLink="/portfolio">Portfolio</a>
+        </div>
+        <div class="stock-navbar-right-temp"></div>
+    </div>
+</div> -->
+
+<div class="container-fluid">
+  <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-12 col-md-8">
+          <div *ngIf="stock_buy_notify" class="notify-div nt-y">
+            <div class="notify-text">
+                {{ buyStockM.ticker }} bought successfully.
+            </div>
+            <button type="button" class="btn-close notify-btt" (click)="removedPurchaseNotify()"></button>
+          </div>
+          <div *ngIf="stock_sell_notify" class="notify-div nt-n">
+              <div class="notify-text">
+                  {{ sellStockM.ticker }} sold successfully.
+              </div>
+              <button type="button" class="btn-close notify-btt" (click)="removedPurchaseNotify()"></button>
+          </div>
+          <div class="portfolio-header">My Portfolio</div>
+          <div class="wallet-amount">Money in Wallet: ${{ wallet.toFixed(2) }}</div>
+          <!-- <div *ngIf="stock_loading" class="row stock-loader">
+              <div class="d-flex justify-content-center">
+                  <div class="spinner-border text-primary" role="status">
+                      <span class="sr-only"></span>
+                  </div>
+              </div>
+          </div> -->
+          
+          <div *ngIf="portfolio_loading" class="container">
+            <mat-progress-spinner mode="indeterminate" diameter="40"></mat-progress-spinner>
+          </div>
+
+
+          <div class="empty-pf" *ngIf="isPortfolioEmpty ; else portfolioNotEmpty">
+              Currently you don't have any stock in your portfolio.
+          </div>
+          <ng-template #portfolioNotEmpty>
+              <div class="col gap-2 pf-stocks-tab" *ngFor="let stock of portfolio_stocks">
+                <div class="card">
+                  <div class="card-header stk-header" (click)="searchStock(stock.ticker)">
+                    <span class="card-st-head">{{ stock.ticker }} </span><span class="card-st-name">{{stock.name}}</span>
+                  </div>
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-md-6 col-12">
+                        <div class="row">
+                          <div class="col-6 st st-head">Quantity:</div>
+                          <div class="col-6 st st-val">{{ stock.quantity }}</div>
+                        </div>
+                        <div class="row">
+                          <div class="col-6 st st-head">Avg. Cost / Share:</div>
+                          <div class="col-6 st st-val">{{ stock.avg.toFixed(2) }}</div>
+                        </div>
+                        <div class="row">
+                          <div class="col-6 st st-head">Total Cost:</div>
+                          <div class="col-6 st st-val">{{ stock.cost.toFixed(2) }}</div>
+                        </div>
+                      </div>
+                      <div class="col-md-6 col-12">
+                        <div class="row">
+                          <div class="col-6 st-head" style="color:{{ stock.color }};">Change:</div>
+                          <div class="col-6 st-val" style="color:{{ stock.color }};">
+                            <svg *ngIf="stock.stock_up=='T'" class="sign-logo-up" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-up-fill" viewBox="0 0 16 16">
+                              <path d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z"/>
+                            </svg>
+                            <svg *ngIf="stock.stock_up=='F'" class="sign-logo-down" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                                <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+                            </svg>
+                            {{ stock.change.toFixed(2) }}
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-6 st-head" style="color:{{ stock.color }};">Current Price:</div>
+                          <div class="col-6 st-val" style="color:{{ stock.color }};">{{ stock.current.toFixed(2) }}</div>
+                        </div>
+                        <div class="row">
+                          <div class="col-6 st-head" style="color:{{ stock.color }};">Market Value:</div>
+                          <div class="col-6 st-val" style="color:{{ stock.color }};">{{ stock.market.toFixed(2) }}</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-footer text-body-secondary">
+                    <!-- <button class="buy-button" (click)="buystock(stock)">Buy</button> -->
+                    <button class="buy-button" 
+                      (click)="buymodal({
+                          'ticker':stock.ticker,
+                          'current':stock.current,
+                          'name':stock.name
+                        },buystock)">Buy</button>
+                    <button class="sell-button" (click)="sellmodal({
+                      'ticker':stock.ticker,
+                      'current':stock.current,
+                      'name':stock.name,
+                      'quantity':stock.quantity
+                    },sellstock)">Sell</button>
+                  </div>
+                </div>
+              </div>
+          </ng-template>
+      </div>
+      <div class="col-md-2"></div>
+  </div>
+</div>
+
+<ng-template #buystock let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">{{ buyStockM.ticker }}</h4>
+    <div class="close-btt-div">
+      <!-- <button type="button" class="close-btt" (click)="modal.close()"><b><u>x</u></b></button> -->
+      <button type="button" class="close-btt" (click)="modal.close()">x</button>
+    </div>
+  </div>
+  <div class="modal-body">
+      <form>
+          <div class="stock-modal">Current Price: {{ buyStockM.current }}</div>
+          <div class="stock-modal">Money in Wallet: ${{ wallet.toFixed(2) }}</div>
+          <div class="stock-modal qty-row row">
+            <div class="col-md-2 col-3">
+              <span>Quantity:</span>
+            </div>
+            <div class="col-md-10 col-9 qty-div">
+              <input
+                id="quantity" 
+                class="form-control qty"
+                name="stock_quantity"
+                (input)="costcaluationBuy($event)"
+                type="number" value="0" min="0"
+              />
+            </div>
+          </div>
+          <div *ngIf=noBuyPossible style="margin-top:5px; color:red">Not enough money in wallet!</div>
+      </form>
+  </div>
+  <div class="modal-footer">
+      <div class="cal">Total: {{ buy_total_cost.toFixed(2) }}</div>
+      <button type="button" class="btn modal-button" 
+        (click)="buyStock(buyStockM);
+        modal.close()"
+        [disabled]="buy_btt_disable">Buy</button>
+  </div>
+</ng-template>
+
+<ng-template #sellstock let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">{{ sellStockM.ticker }}</h4>
+    <div class="close-btt-div">
+      <!-- <button type="button" class="close-btt" (click)="modal.close()"><b><u>x</u></b></button> -->
+      <button type="button" class="close-btt" (click)="modal.close()">x</button>
+    </div>
+  </div>
+  <div class="modal-body">
+      <form>
+          <div class="stock-modal">Current Price: {{ sellStockM.current }}</div>
+          <div class="stock-modal">Money in Wallet: ${{ wallet.toFixed(2) }}</div>
+          <div class="stock-modal qty-row row">
+            <div class="col-md-2 col-3">
+              <span>Quantity:</span>
+            </div>
+            <div class="col-md-10 col-9 qty-div">
+              <input
+                id="quantity" 
+                class="form-control qty"
+                name="stock_quantity"
+                (input)="costcaluationSell($event,sellStockM.quantity)"
+                type="number" value="0" min="0"
+              />
+            </div>
+          </div>
+          <div *ngIf=noSellPossible style="margin-top:5px; color:red">You cannot sell the stocks that you don't have!</div>
+      </form>
+  </div>
+  <div class="modal-footer">
+      <div class="cal">Total: {{ sell_total_cost.toFixed(2) }}</div>
+      <button type="button" class="btn modal-button" 
+        (click)="sellStock(sellStockM);
+        modal.close()"
+        [disabled]="sell_btt_disable">Sell</button>
+  </div>
+</ng-template>

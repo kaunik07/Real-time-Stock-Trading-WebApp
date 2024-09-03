@@ -1,0 +1,78 @@
+
+<!-- STOCK TITLE -->
+<div class="container">
+    <div class="row stock-title">
+        <div class="col-md-3 col-1"></div>
+        <div class="col-md-6 col-10">STOCK SEARCH</div>
+        <div class="col-md-3 col-1"></div>
+    </div>
+</div>
+
+
+<!-- SEARCH BAR -->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-4 col-sm-3 col-2"></div>
+        <div class="stock-srch-bar col-lg-4 col-sm-6 col-8">
+            <form ngNativeValidate [formGroup]="stockSearchName" (ngSubmit)="onSearchSummary(stockSearchName.value);">
+                <div class="row">
+                    <input class=" s-input col-8" matInput [matAutocomplete]="stock_auto" [formControl]="stock_cm"  formControlName="company" type="text" placeholder="Enter stock ticker symbol"  [(ngModel)]="stocktextValue"/>
+                    <button class="col-2 s-btt " type="submit">
+                        <svg  xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+                        </svg>
+                    </button>
+                    <button class="col-2 s-clr-btt" type="reset" (click)="clearData()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                            <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/>
+                        </svg>
+                    </button>
+                    <mat-autocomplete #stock_auto="matAutocomplete" panelClass="autocomplete-q" (optionSelected)="StockSelected($event)" class="autocomplete-q">  
+                        <!-- <ng-container  else Loaded" > -->
+                            <mat-option *ngIf="autocomplete_loading">
+                                <mat-progress-spinner mode="indeterminate" diameter="30"></mat-progress-spinner>
+                            </mat-option>
+                        <!-- </ng-container> -->
+                        <!-- <ng-template #Loaded>   -->
+                            <mat-option *ngFor="let stock of stockOptions | async" [value]="stock.ticker">
+                                {{stock.ticker}} | {{stock.company_name}}
+                            </mat-option>
+                        <!-- </ng-template> -->
+                    </mat-autocomplete>
+                </div>
+            </form>
+        </div>
+        <div class="col-lg-4 col-sm-3 col-2"></div>
+    </div>
+</div>
+
+<div *ngIf="stock_loading" class="stock-loader container">
+    <mat-progress-spinner mode="indeterminate" diameter="40"></mat-progress-spinner>
+</div>
+
+<!-- STOCK SEARCH RESULTS -->
+<div class="container" *ngIf="stock_empty">
+    <div class="row stock-nf-div">
+        <div class="col-md-2 col-1"></div>
+        <div class="stock-nf col-10 col-md-8">Please Enter a valid Ticker</div>
+        <div class="col-md-2 col-1"></div>
+    </div>
+</div>
+
+<div class="container" *ngIf="stock_not_found">
+    <div class="row stock-nf-div">
+        <div class="col-md-2 col-1"></div>
+        <div class="stock-nf col-10 col-md-8">No data found. Please enter a valid Ticker</div>
+        <div class="col-md-2 col-1"></div>
+    </div>
+</div>
+
+<div class="container" *ngIf="stock_found">
+    <div class="row stock-nf-div">
+        <div class="col-md-2 col-1"></div>
+        <div class="col-10 col-md-8">
+            <app-search ></app-search>
+        </div>
+        <div class="col-md-2 col-1"></div>
+    </div>
+</div>

@@ -1,0 +1,34 @@
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6 col-12 rows-col-1">
+            <!-- <div class="row rows-col-1"> -->
+                <div class="col-lg-6 col-12 stock-price-summary stock-price-summary-1"><b>High Price: </b>{{ stockprice.h.toFixed(2) }}</div>
+                <div class="col-lg-6 col-12 stock-price-summary"><b>Low Price: </b>{{ stockprice.l.toFixed(2) }}</div>
+                <div class="col-lg-6 col-12 stock-price-summary"><b>Open Price: </b>{{ stockprice.o.toFixed(2) }}</div>
+                <div class="col-lg-6 col-12 stock-price-summary"><b>Prev. Close: </b>{{ stockprice.pc.toFixed(2) }}</div>
+            <!-- </div> -->
+            
+            <div class="col summary-about"><u>About the Company</u></div>
+
+            <div class="col company-summary"><b>IPO Start Date: </b>{{ company_details.ipo}}</div>
+            <div class="col company-summary"><b>Industry: </b>{{ company_details.finnhubIndustry}}</div>
+            <div class="col company-summary"><b>Webpage: </b><a href="{{ company_details.weburl }}" target="_blank">{{ company_details.weburl }}</a></div>
+            <div class="col company-summary"><b>Company peers:</b></div>
+            <div class="col company-peer-list">
+                <div class="company-peer-name" *ngFor="let company of company_peers">
+                    <div (click)="onSearch(company)"><u>{{ company }}</u>,</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-lg-6" style="padding:12px">
+            <highcharts-chart
+                *ngIf="isHighcharts"
+                [Highcharts]="Highcharts"
+                [constructorType]="'stockChart'"
+                [options]="StockOptions"
+                [(update)]="updateFlag"
+                style="width: 100%; height: 400px; display: flex; justify-content: center; align-items: center; background-color:#f8f8f8;"
+            ></highcharts-chart>
+        </div>
+    </div>
+</div>

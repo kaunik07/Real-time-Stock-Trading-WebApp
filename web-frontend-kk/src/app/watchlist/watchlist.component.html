@@ -1,0 +1,68 @@
+<!-- <div class="navbar navbar-expand-lg stock-navbar">
+    <div class="navbar-brand stock-navbar-left col-md-9">Stock Search</div>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" >
+        <span class="navbar-toggler-icon ">
+            <i class="fas fa-bars" style="color:#fff; font-size:28px;"></i>
+        </span>
+    </button>
+    <div class="collapse navbar-collapse stock-navbar-right" id="navbarNavAltMarkup">
+        <div class="navbar-nav stock-navbar-right-div">
+            <a class="nav-item portal-nav nav-link" routerLink="/search/home">Search</a>
+            <a class="nav-item portal-nav nav-link active-nav" routerLink="/watchlist">Watchlist</a>
+            <a class="nav-item portal-nav nav-link" routerLink="/portfolio">Portfolio</a>
+        </div>
+        <div class="stock-navbar-right-temp"></div>
+    </div>
+</div> -->
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-12 col-md-8">
+            <div class="watch-page-header">My Watchlist</div>
+            <div *ngIf="watchlist_loading" class="container">
+                <mat-progress-spinner mode="indeterminate" diameter="40"></mat-progress-spinner>
+            </div>
+            <!-- <div *ngIf="stock_loading" class="row stock-loader">
+                <div class="d-flex justify-content-center">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="sr-only"></span>
+                    </div>
+                </div>
+            </div> -->
+            <div class="empty-watch" *ngIf="WatchlistEmpty">
+                Currently you don't have any stock in your watchlist.
+            </div>
+            <div *ngIf="WatchlistFetched">
+                <div class="col watchlist-stocks-tab" *ngFor="let stock of watchlist_stocks">
+                    <div class="card list h-100" (click)="cardOnClick(stock.ticker)">
+                        <button type="button" class="btn-close" (click)="deleteWatchlist(stock.ticker)"></button>
+                        <div class="row up-div">
+                            <div class="col up">
+                              {{ stock.ticker }}
+                            </div>
+                            <div class="col price up" style="color:{{ stock.color }};"> 
+                              {{ stock.c }}
+                            </div>
+                        </div>
+                        <div class="row below-div">
+                            <div class="col below">
+                                {{ stock.company_name }}
+                            </div>
+                            <div *ngIf="stock.up" class="col below" style="color:{{ stock.color }};">
+                                <!-- <button *ngIf="stock.up==='true'" class="sign-logo-up" style="background-color:'{{ stock.color }}'"></button>{{ stock.d }} ({{ stock.dp.toFixed(2)}}%) -->
+                                <button class="sign-logo-up"></button>
+                                {{ stock.d }} ({{ stock.dp.toFixed(2)}}%)
+                            </div>
+                            <div *ngIf="!stock.up" class="col below" style="color:{{ stock.color }};">
+                                <button class="sign-logo-down"></button>
+                                {{ stock.d }} ({{ stock.dp.toFixed(2)}}%)
+                            </div>
+                          </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+</div>

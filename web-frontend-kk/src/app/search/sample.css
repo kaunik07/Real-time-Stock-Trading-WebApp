@@ -1,0 +1,199 @@
+.notify-div{
+    text-align: center;
+    height: 50px;
+    font-size: 12px;
+    border-radius: 7px;
+    padding-top: 15px;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 20px;
+}
+
+.nt-y{
+    background-color: #d7ebe1;
+    color: #597268;
+    border: 1px solid #9cd4d9;
+}
+
+.nt-n{
+    background-color: #f9dcdf;
+    color: #91656c;
+    border: 1px solid #e2c4c9;
+}
+
+.notify-text{
+    flex:1;
+}
+
+.notify-btt{
+    margin-right: 10px;
+}
+
+.tick_star{
+    display: flex;
+    flex-direction: row;
+    gap:5px;
+    justify-content: center;
+}
+
+.company_name{
+    text-wrap: wrap !important;
+}
+
+.star-wish{
+    height: 20px;
+    scale:1.2;
+}
+
+.star-wishlisted{
+    fill: #ffdd04;
+    /* fill: cyan; */
+}
+
+.star-not-wishlisted{
+    fill:red
+}
+
+/* PRICE */
+.sign-logo-down{
+    fill:#e03c4d;
+}
+.sign-logo-up{
+    fill:#339454;
+}
+.positive-value{
+    color:#339454;
+}
+
+.negative-value{
+    color: #e03c4d;
+}
+.stock-change{
+    margin-right:2px ;
+}
+
+
+/* COMMON CSS */
+.top-1{
+    font-size: 27px;
+    font-weight: 500;
+    text-align: center;
+}
+.top-2{
+    font-size: 18px;
+    /* font-weight: 500; */
+    margin: 10px 0px;
+    text-align: center;
+    text-wrap: nowrap;
+    
+}
+.top-3{
+    font-size: 12px;
+    /* margin-top: 2px; */
+    font-weight: 100;
+    text-align: center;
+}
+
+/* COMPANY LOGO */
+.company-logo{
+    width: 8vh;
+    height: 8vh;
+    /* width: 4rem;
+    height: 4rem; */
+}
+
+.company-logo-div{
+    display: flex;
+    justify-content: center;
+}
+
+
+
+/* MARKET_STATUS */
+.market-status{
+    /* background-color: darkslategray; */
+    font-size: 12px;
+    text-align: center;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+
+/* NAV TAB */
+.tab-content{
+    margin-top: 20px;
+}
+
+/* BUY SELL BUTTONS */
+.buy-sell{
+    margin-top: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap:10px;
+}
+
+.buy-button{
+    background-color: #339454;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 12px;
+    height: 30px;
+    width: 50px;
+    margin-top: 5px;
+}
+
+.sell-button{
+    background-color: #e03c4d;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 12px;
+    height: 30px;
+    width: 50px;
+    margin-top: 5px;
+}
+
+/* MODALS */
+.modal-button{
+    background-color: #007d48;
+    color: white;
+}
+
+.qty-row{
+    align-items: baseline;
+}
+
+.cal{
+    text-align: left;
+    flex:1;
+}
+
+.qty-div{
+    margin-left: -20px;
+}
+
+.qty::-webkit-inner-spin-button,
+.qty::-webkit-outer-spin-button{
+    opacity: 1;
+}
+
+.close-btt{
+    width: 8px;
+    height: 20px;
+    color: #3595ff;
+    border: none;
+    margin-right: 5px;
+    padding: 0px 0px 0px 0px;
+    background-color: white;
+    font-size: 15px;
+    border-bottom: 2.5px solid #3595ff;
+}
+
+.close-btt-div{
+    flex:1;
+    display: flex;
+    align-items: baseline;
+    justify-content: flex-end;
+}

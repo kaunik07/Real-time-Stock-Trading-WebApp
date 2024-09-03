@@ -1,0 +1,20 @@
+<div class="container news">
+  <div class="row row-cols-1 row-cols-lg-2 g-3 news_row">
+    <div class="col" *ngFor="let news of company_news">
+      <div class="card h-100 news-card mb-3" (click)="ExploreNews(news)">
+        <div class="container">
+          <div class="row g-0 news-row">
+            <div class="col-md-3 h-100 news-image-div">
+              <img src="{{ news.image}}" class=" news-image " alt="...">
+            </div>
+            <div class="col-md-9">
+              <div class="card-body">
+                <div class="card-text news-headline text-small">{{ news.headline }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

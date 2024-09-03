@@ -1,0 +1,27 @@
+<div class="main-content">
+    <div class="navbar navbar-expand-lg nav-tmp">
+        <div class="navbar-brand txt-nav-head">Stock Search</div>
+        <button class="navbar-toggler tgg-nav" type="button" data-bs-toggle="collapse" data-bs-target="#navbarList">
+            <span class="navbar-toggler-icon">
+                
+            </span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarList">
+            <div class="navbar-nav nav-list">
+                <a class="nav-item txt-nav-list nav-link active-nav" routerLinkActive="active" routerLink="/search/home">Search</a>
+                <a class="nav-item txt-nav-list nav-link" routerLinkActive="active" routerLink="/watchlist">Watchlist</a>
+                <a class="nav-item txt-nav-list nav-link " routerLinkActive="active" routerLink="/portfolio">Portfolio</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="data">
+        <router-outlet></router-outlet>
+    </div>
+   
+</div>
+<div class="footer-">
+    <app-footer></app-footer>
+</div>
+
+

@@ -1,0 +1,16 @@
+{
+  "name": "web-backend-kk",
+  "version": "1.0.0",
+  "description": "WEB_TECH",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.3",
+    "mongodb": "^6.4.0"
+  }
+}

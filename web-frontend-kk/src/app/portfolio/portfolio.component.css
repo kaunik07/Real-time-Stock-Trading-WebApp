@@ -1,0 +1,179 @@
+.stock-navbar{
+    background-color: #1d279d;
+}
+
+.navbar-toggler-icon{
+    color: white;
+}
+
+.stock-navbar-left{
+    color: white;
+    padding-left: 2%;
+    font-size: 15px;
+}
+
+#navbarNavAltMarkup{
+    flex-direction: row-reverse;
+}
+
+.stock-navbar-right-div{
+    padding-right: 10%;
+}
+
+.stk-header{
+    cursor: pointer;
+}
+
+.active-nav{
+    border: 1px solid white;
+    border-radius: 10px;
+}
+
+.portal-nav{
+    color: white;
+    /* border: 1px solid white; */
+    /* margin:0px 5px; */
+    font-size: 12px;
+    padding-left: 2%;
+    /* border-radius: 15px; */
+    /* flex:1; */
+}
+
+.portfolio-header{
+    font-size: 30px;
+    font-weight: 400;
+    margin-top: 50px;
+    margin-bottom: 20px;
+}
+
+.wallet-amount{
+    font-size: 18px;
+    font-weight: 400;
+    margin-bottom: 20px;
+}
+
+.empty-pf{
+    background-color: #ffefc4;
+    border-color: #fcecc4;
+    font-size: 12px;
+    text-align: center;
+    padding: 15px 0px ;
+    border-radius: 5px;
+}
+
+.card{
+    margin: 12px 0px;
+}
+
+.card-header{
+    padding: 7px 10px;
+}
+
+.card-st-head{
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.card-st-name{
+    font-size: 15px;
+    font-weight: 400;
+    color:#98989a;
+}
+
+.st{
+    font-size: 15px;
+    font-weight: 400;
+}
+
+.buy-button{
+    background-color: #0070ff;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    height: 30px;
+    width: 45px;
+}
+
+.sell-button{
+    background-color: #f0143e;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    margin-left: 5px;
+    height: 30px;
+    width: 45px
+}
+
+.modal-button{
+    background-color: #007d48;
+    color: white;
+}
+
+.qty-row{
+    align-items: baseline;
+}
+
+.cal{
+    text-align: left;
+    flex:1;
+}
+
+.qty-div{
+    margin-left: -20px;
+}
+
+.qty::-webkit-inner-spin-button,
+.qty::-webkit-outer-spin-button{
+    opacity: 1;
+}
+
+.close-btt{
+    width: 8px;
+    height: 20px;
+    color: #3595ff;
+    border: none;
+    margin-right: 5px;
+    padding: 0px 0px 0px 0px;
+    background-color: white;
+    font-size: 15px;
+    border-bottom: 2.5px solid #3595ff;
+}
+
+.close-btt-div{
+    flex:1;
+    display: flex;
+    align-items: baseline;
+    justify-content: flex-end;
+}
+
+.notify-div{
+    margin-top: 15px;
+    text-align: center;
+    height: 50px;
+    font-size: 12px;
+    border-radius: 7px;
+    padding-top: 15px;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 20px;
+}
+
+.nt-y{
+    background-color: #d7ebe1;
+    color: #597268;
+    border: 1px solid #9cd4d9;
+}
+
+.nt-n{
+    background-color: #f9dcdf;
+    color: #91656c;
+    border: 1px solid #e2c4c9;
+}
+
+.notify-text{
+    flex:1;
+}
+
+.notify-btt{
+    margin-right: 10px;
+}

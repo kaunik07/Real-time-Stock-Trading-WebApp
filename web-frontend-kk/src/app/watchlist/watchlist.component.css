@@ -1,0 +1,111 @@
+.stock-navbar{
+    background-color: #1d279d;
+}
+
+.navbar-toggler-icon{
+    color: white;
+}
+
+.stock-navbar-left{
+    color: white;
+    padding-left: 2%;
+    font-size: 15px;
+}
+
+#navbarNavAltMarkup{
+    flex-direction: row-reverse;
+}
+
+.stock-navbar-right-div{
+    padding-right: 10%;
+}
+
+.active-nav{
+    border: 1px solid white;
+    border-radius: 10px;
+}
+
+.portal-nav{
+    color: white;
+    /* border: 1px solid white; */
+    /* margin:0px 5px; */
+    font-size: 12px;
+    padding-left: 2%;
+    /* border-radius: 15px; */
+    /* flex:1; */
+}
+
+.empty-watch{
+    margin-top: 20px;
+    background-color: #ffefc4;
+    height: 60px;
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid #fcecb4;
+    text-align: center;
+    font-size: 12px;
+    padding-top: 20px;
+}
+
+.watch-page-header{
+    font-size: 30px;
+    font-weight: 400;
+    margin-top: 50px;
+    margin-bottom: 30px;
+}
+
+.watchlist-stocks-tab{
+    /* margin-top: 50px; */
+}
+
+.list{
+    margin: 10px 0px ;
+    padding: 20px 10px;
+    cursor: pointer;
+}
+
+.btn-close{
+    height: 2px;
+    width: 2px;
+    text-align: right;
+    margin-bottom: 10px;
+    margin-top: -8px;
+    --bs-btn-close-focus-shadow:none;
+}
+
+.up{
+    font-size: 20px;
+    font-weight: 500;   
+}
+
+.price{
+    padding-left: px;
+}
+
+.below{
+    font-size:15px;
+    margin-top: 5px;
+}
+
+/* .sign-logo{
+    height: 5px;
+    width: 5px;
+    mask-repeat: no-repeat;
+} */
+
+.sign-logo-down{
+    mask: url("../../assets/caret-down-fill.svg");
+    mask-repeat: no-repeat;
+    background-color:#e03c4d;
+    height: 15px;
+    width: 5px;
+}
+
+.sign-logo-up{
+    mask: url("../../assets/caret-up-fill.svg");
+    mask-repeat: no-repeat;
+    background-color: #339454;
+    height: 15px;
+    width: 5px;
+}
+

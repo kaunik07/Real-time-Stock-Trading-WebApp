@@ -1,0 +1,42 @@
+.stock-price-summary-1{
+    margin-top:20px;
+}
+
+.stock-price-summary{
+    font-size: 12px;
+    /* background-color: aquamarine; */
+    /* border: 1px solid; */
+    text-align: center;
+}
+
+.summary-about{
+    margin: 20px 0px;
+    text-align: center;
+}
+
+.company-summary{
+    text-align: center;
+    font-size: 12px;
+    margin: 10px 0px;
+}
+
+.company-peer-list{
+    display: flex;
+    flex-direction: row;
+    margin-right: 5px;
+    font-size: 12px;
+    gap:2px;
+    justify-content: center;
+    flex-wrap: wrap;
+    
+}
+
+.company-peer-name{
+    color: #0d6efd;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.company-peer-name:hover{
+    color: #0000FF
+}
